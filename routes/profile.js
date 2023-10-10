@@ -26,5 +26,4 @@ function verifyToken(req, res, next){
         res.send({result: "Invalid Token"});
     }
 }
-
 module.exports = router;
