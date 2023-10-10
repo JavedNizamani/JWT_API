@@ -7,8 +7,8 @@ const router = express.Router();
 router.post('/login', (req, res)=>{
     const userData = {
         id: 1,
-        name: "Javed",
-        email: "javed@gmail.com"
+        name: "Asif",
+        email: "asif@gmail.com"
     }
     jwt.sign({userData},secretKey,{expiresIn:"400s"},(err, token)=>{
         res.json({token});

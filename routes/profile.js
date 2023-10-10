@@ -18,12 +18,13 @@ router.post('/profile',verifyToken, (req, res)=>{
 function verifyToken(req, res, next){
     const authHeader = req.headers['authorization']
     if(typeof authHeader !== 'undefined'){
-        const splitHeader = authHeader.split(" ");
-        const token = splitHeader[1];
+        // const splitHeader = authHeader.split(" ");
+        const token = authHeader;
         req.token = token;
         next();
     }else{
         res.send({result: "Invalid Token"});
     }
 }
+
 module.exports = router;
