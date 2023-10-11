@@ -1,7 +1,8 @@
 const http = require('http');                                  // creating server to run api
 const app = require('./app');
 const PORT = process.env.PORT || 3000;
-const server = http.createServer(app);                         // run entire api at server
+const server = http.createServer(app);
+require('./utils/db.tables');
  
 
     server.listen(PORT,()=>{
