@@ -3,9 +3,7 @@ const jwt = require('jsonwebtoken');
 const secretKey = 'secretKey';
 const router = express.Router();
 
-router.post('/login');
-
-router.post('/profile',verifyToken, (req, res)=>{
+router.get('/profile',verifyToken, (req, res)=>{
     jwt.verify(req.token, secretKey,(err, authorizedData)=>{
         if(err){
             res.send({result: 'Invalid Token'});
@@ -18,7 +16,6 @@ router.post('/profile',verifyToken, (req, res)=>{
 function verifyToken(req, res, next){
     const authHeader = req.headers['authorization']
     if(typeof authHeader !== 'undefined'){
-        // const splitHeader = authHeader.split(" ");
         const token = authHeader;
         req.token = token;
         next();
