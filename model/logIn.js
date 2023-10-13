@@ -12,7 +12,8 @@ module.exports = (sequelize, Sequelize)=>{
         password: {
             type: Sequelize.STRING,
             allowNull: false
-        }
+        },
+
     }, {
         tableName: 'logIn',
         timestamps: false

@@ -1,18 +1,27 @@
 var db = require('../utils/db.tables');
-var logIn = db.logIn;
+const bcrypt = require('bcryptjs');                                    
+
+var loginDb = db.logIn;
 
 const createUsers = async (req, res)=>{
     try{
         console.log(req.body);
         const {name, email, password} = req.body;
 
-        await logIn.create({
+            // making validations
+        const userExists = await loginDb.findOne({
+            where: {email}
+        });
+        if(userExists){
+            return res.status(400).send('Email already Exists');
+        }
+
+        await loginDb.create({
             name: name,
             email: email,
-            password: password
-        }).then((result)=>{
-            res.status(200).send(result);
+            password: await bcrypt.hash(password, 5),
         });
+        return res.status(200).send('Successfully Registered');
     }catch(error){
         console.log(error.stack);
     }
