@@ -1,9 +1,9 @@
-const express = require('express');
 const jwt = require('jsonwebtoken');
-const secretKey = 'secretKey';
+const dotenv = require('dotenv');
+dotenv.config();
 
 var jwtData = (req, res)=>{
-    jwt.verify(req.token, secretKey,(err, authorizedData)=>{
+    jwt.verify(req.token, process.env.JWT_SECRET,(err, authorizedData)=>{
         if(err){
             res.send({result: 'Invalid Token'});
         }else{
@@ -22,7 +22,6 @@ function verifyToken(req, res, next){
         res.send({result: "Invalid Token"});
     }
 }
-
 module.exports = {
     verifyToken,
     jwtData
